@@ -1,0 +1,43 @@
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    app: digihot-oppslag
+    team: teamdigihot
+  name: digihot-oppslag
+  namespace: teamdigihot
+spec:
+  image: {{ image }}
+  team: teamdigihot
+  liveness:
+    path: /is_alive
+    initialDelay: 30
+    timeout: 100
+  readiness:
+    path: /is_ready
+    initialDelay: 30
+    timeout: 100
+  port: 8080
+  replicas:
+    max: 2
+    min: 2
+  accessPolicy:
+    inbound:
+      rules:
+        - application: hm-saksberiker
+        - application: hm-soknad-api
+        - application: hm-soknadsbehandling
+          namespace: teamdigihot
+          cluster: prod-gcp
+  resources:
+    limits:
+      cpu: 800m
+      memory: 2024Mi
+    requests:
+      cpu: 500m
+      memory: 1024Mi
+  env:
+    - name: PORT
+      value: "8080"
+    - name: KTOR_ENV
+      value: production
