@@ -27,8 +27,6 @@ spec:
         - application: hm-saksberiker
         - application: hm-soknad-api
         - application: hm-soknadsbehandling
-          namespace: teamdigihot
-          cluster: prod-gcp
   resources:
     limits:
       cpu: 800m
