@@ -17,6 +17,8 @@ spec:
     path: /is_ready
     initialDelay: 30
     timeout: 100
+  ingresses:
+    - https://digihot-oppslag.dev.intern.nav.no
   port: 8080
   replicas:
     max: 1
