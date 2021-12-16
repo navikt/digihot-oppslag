@@ -21,7 +21,7 @@ object Kotlin {
 }
 
 object KoTest {
-    const val version = "4.2.0.RC2"
+    const val version = "4.2.0"
 
     // for kotest framework
     const val runner = "io.kotest:kotest-runner-junit5-jvm:$version"
@@ -37,16 +37,11 @@ object KoTest {
 }
 
 object Ktor {
-    const val version = "1.6.4"
+    const val version = "1.6.7"
     const val server = "io.ktor:ktor-server:$version"
     const val serverNetty = "io.ktor:ktor-server-netty:$version"
     const val ktorTest = "io.ktor:ktor-server-test-host:$version"
     fun library(name: String) = "io.ktor:ktor-$name:$version"
-}
-
-object Micrometer {
-    const val version = "1.4.0"
-    const val prometheusRegistry = "io.micrometer:micrometer-registry-prometheus:$version"
 }
 
 object Mockk {

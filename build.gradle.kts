@@ -4,8 +4,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val ktor_version = Ktor.version
 val logback_version: String by project
-val influxdb_version: String by project
-val influxdb_aiven_version: String by project
 
 plugins {
     application
@@ -42,7 +40,7 @@ java {
 }
 
 dependencies {
-    api("ch.qos.logback:logback-classic:1.2.6")
+    api("ch.qos.logback:logback-classic:1.2.7")
     api("net.logstash.logback:logstash-logback-encoder:6.6") {
         exclude("com.fasterxml.jackson.core")
     }
@@ -55,7 +53,6 @@ dependencies {
     implementation(Kotlin.Logging.kotlinLogging)
     implementation(kotlin("stdlib-jdk8"))
     implementation("io.ktor:ktor-jackson:$ktor_version")
-    implementation(Micrometer.prometheusRegistry)
 
     testImplementation(Kotlin.testJUnit5)
     testImplementation(KoTest.assertions)
