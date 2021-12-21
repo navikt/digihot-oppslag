@@ -10,6 +10,9 @@ import mu.KotlinLogging
 private val logger = KotlinLogging.logger {}
 
 internal fun Route.geografiRoutes() {
+    get("/geografi/postnr") {
+        call.respond(Postnummer.hentAllePoststeder())
+    }
     get("/geografi/postnr/{postnr}") {
         val postnr = call.parameters["postnr"]
         try {

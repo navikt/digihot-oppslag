@@ -54,9 +54,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("io.ktor:ktor-jackson:$ktor_version")
 
-    testImplementation(Kotlin.testJUnit5)
-    testImplementation(KoTest.assertions)
-    testImplementation(KoTest.runner)
+    testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
     testImplementation(Ktor.ktorTest)
     testImplementation(Mockk.mockk)
 }

@@ -14,6 +14,10 @@ object Postnummer {
         return postalCodeTable[postalCode]
     }
 
+    fun hentAllePoststeder(): Map<String, PostnrDto> {
+        return postalCodeTable.toMap()
+    }
+
     init {
         val csvSplitBy = "\t"
         javaClass.classLoader.getResourceAsStream(FILENAME)?.bufferedReader(StandardCharsets.UTF_8)
