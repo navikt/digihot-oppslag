@@ -7,6 +7,7 @@ import io.ktor.features.ContentNegotiation
 import io.ktor.http.ContentType
 import io.ktor.jackson.JacksonConverter
 import io.ktor.request.path
+import io.ktor.routing.IgnoreTrailingSlash
 import io.ktor.routing.route
 import io.ktor.routing.routing
 import no.nav.hjelpemidler.oppslag.geografi.Kommunenummer
@@ -26,6 +27,8 @@ fun Application.module() {
         level = Level.TRACE
         filter { call -> !call.request.path().startsWith("/internal") }
     }
+
+    install(IgnoreTrailingSlash)
 
     val postnummer = Postnummer()
     val kommunenummer = Kommunenummer()
