@@ -6,8 +6,10 @@ import java.nio.charset.StandardCharsets
 /**
  * Source: https://www.bring.no/radgivning/sende-noe/adressetjenester/postnummer
  */
-object Postnummer {
-    private const val FILENAME = "geografi/postal_codes_no.tsv"
+
+private const val FILENAME = "geografi/postal_codes_no.tsv"
+
+class Postnummer {
     private val postalCodeTable: MutableMap<String, PostnrDto> = mutableMapOf()
 
     fun hentPoststed(postalCode: String?): PostnrDto? {
@@ -31,7 +33,7 @@ object Postnummer {
                 if (postnummer.isNotBlank() && poststed.isNotBlank() && kommunenummer.isNotBlank() && kommunenavn.isNotBlank()) {
                     postalCodeTable[postnummer] = PostnrDto(poststed, kommunenummer, kommunenavn)
                 } else {
-                    throw IOException("There was an error parsing post data from file for postal code {}")
+                    throw IOException("There was an error parsing post data from file for postal code '$postnummer'")
                 }
             }
     }

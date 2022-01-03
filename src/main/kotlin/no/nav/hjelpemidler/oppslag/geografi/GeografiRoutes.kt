@@ -9,15 +9,15 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-internal fun Route.geografiRoutes() {
+internal fun Route.geografiRoutes(postnummer: Postnummer, kommunenummer: Kommunenummer) {
     get("/geografi/postnr") {
-        call.respond(Postnummer.hentAllePoststeder())
+        call.respond(postnummer.hentAllePoststeder())
     }
     get("/geografi/postnr/{postnr}") {
         val postnr = call.parameters["postnr"]
         try {
             if (postnr != null && postnr.length == 4 && postnr.all { it.isDigit() }) {
-                call.respond(Postnummer.hentPoststed(postnr)!!)
+                call.respond(postnummer.hentPoststed(postnr)!!)
             } else {
                 throw RuntimeException("Feil ved oppslag på ugyldig postnr $postnr")
             }
@@ -26,11 +26,16 @@ internal fun Route.geografiRoutes() {
             call.respond(HttpStatusCode.BadRequest, "Feil ved oppslag på postnr $postnr")
         }
     }
+
+    get("/geografi/kommunenr") {
+        call.respond(kommunenummer.hentAlleKommuner())
+    }
+
     get("/geografi/kommunenr/{kommunenr}") {
         val kommunenr = call.parameters["kommunenr"]
         try {
             if (kommunenr != null && kommunenr.length == 4 && kommunenr.all { it.isDigit() }) {
-                call.respond(Kommunenummer.hentKommuneOgFylke(kommunenr)!!)
+                call.respond(kommunenummer.hentKommuneOgFylke(kommunenr)!!)
             } else {
                 throw RuntimeException("Feil ved oppslag på ugyldig kommunenr $kommunenr")
             }

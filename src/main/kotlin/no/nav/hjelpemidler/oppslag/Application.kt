@@ -9,6 +9,8 @@ import io.ktor.jackson.JacksonConverter
 import io.ktor.request.path
 import io.ktor.routing.route
 import io.ktor.routing.routing
+import no.nav.hjelpemidler.oppslag.geografi.Kommunenummer
+import no.nav.hjelpemidler.oppslag.geografi.Postnummer
 import no.nav.hjelpemidler.oppslag.geografi.geografiRoutes
 import org.slf4j.event.Level
 
@@ -25,10 +27,13 @@ fun Application.module() {
         filter { call -> !call.request.path().startsWith("/internal") }
     }
 
+    val postnummer = Postnummer()
+    val kommunenummer = Kommunenummer()
+
     routing {
         internal()
         route("/api") {
-            geografiRoutes()
+            geografiRoutes(postnummer, kommunenummer)
         }
     }
 }
