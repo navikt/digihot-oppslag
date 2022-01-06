@@ -34,7 +34,7 @@ spec:
       cpu: 500m
       memory: 512Mi
     requests:
-      cpu: 10m
+      cpu: 5m
       memory: 192Mi
   env:
     - name: PORT
