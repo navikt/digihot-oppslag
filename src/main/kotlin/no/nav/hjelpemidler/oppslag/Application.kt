@@ -6,6 +6,7 @@ import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
 import io.ktor.http.ContentType
 import io.ktor.jackson.JacksonConverter
+import io.ktor.jackson.jackson
 import io.ktor.request.path
 import io.ktor.routing.IgnoreTrailingSlash
 import io.ktor.routing.route
@@ -20,7 +21,7 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 fun Application.module() {
 
     install(ContentNegotiation) {
-        register(ContentType.Application.Json, JacksonConverter(JacksonMapper.objectMapper))
+        jackson()
     }
 
     install(CallLogging) {

@@ -1,10 +1,3 @@
-object Jackson {
-    const val version = "2.10.3"
-    const val core = "com.fasterxml.jackson.core:jackson-core:$version"
-    const val kotlin = "com.fasterxml.jackson.module:jackson-module-kotlin:$version"
-    const val jsr310 = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$version"
-}
-
 object Konfig {
     const val konfig = "com.natpryce:konfig:1.6.10.0"
 }

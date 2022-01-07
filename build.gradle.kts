@@ -41,12 +41,8 @@ java {
 
 dependencies {
     api("ch.qos.logback:logback-classic:1.2.7")
-    api("net.logstash.logback:logstash-logback-encoder:6.6") {
-        exclude("com.fasterxml.jackson.core")
-    }
-    implementation(Jackson.core)
-    implementation(Jackson.kotlin)
-    implementation(Jackson.jsr310)
+    api("net.logstash.logback:logstash-logback-encoder:6.6")
+
     implementation(Ktor.serverNetty)
     implementation("io.ktor:ktor-server-core:$ktor_version")
     implementation(Konfig.konfig)
