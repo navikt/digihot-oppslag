@@ -9,7 +9,25 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-internal fun Route.geografiRoutes(postnummer: Postnummer, kommunenummer: Kommunenummer) {
+internal fun Route.geografiRoutes(bydelsnummer: Bydelsnummer, postnummer: Postnummer, kommunenummer: Kommunenummer) {
+    get("/geografi/bydelsnr") {
+        call.respond(bydelsnummer.hentAlleBydeler())
+    }
+
+    get("/geografi/bydelsnr/{bydelsnr}") {
+        val bydelsnr = call.parameters["bydelsnr"]
+        try {
+            if (bydelsnr != null && bydelsnr.length == 6 && bydelsnr.all { it.isDigit() }) {
+                call.respond(bydelsnummer.hentBydel(bydelsnr)!!)
+            } else {
+                throw RuntimeException("Feil ved oppslag på ugyldig bydelsnr $bydelsnr")
+            }
+        } catch (e: Exception) {
+            logger.error(e) { "Feilet ved oppslag på bydelsnr $bydelsnr" }
+            call.respond(HttpStatusCode.BadRequest, "Feil ved oppslag på bydelsnr $bydelsnr")
+        }
+    }
+
     get("/geografi/postnr") {
         call.respond(postnummer.hentAllePoststeder())
     }
