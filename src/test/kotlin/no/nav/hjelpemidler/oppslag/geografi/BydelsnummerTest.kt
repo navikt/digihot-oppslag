@@ -16,6 +16,6 @@ internal class BydelsnummerTest {
     @Test
     fun hentAlleBydeler() {
         val antallBydeler = bydelsnummer.hentAlleBydeler().size
-        Assert.assertEquals(42, antallBydeler)
+        Assert.assertEquals(38, antallBydeler)
     }
 }
