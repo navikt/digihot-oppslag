@@ -40,15 +40,21 @@ java {
 }
 
 dependencies {
-    api("ch.qos.logback:logback-classic:1.2.7")
-    api("net.logstash.logback:logstash-logback-encoder:6.6")
-
+    implementation("ch.qos.logback:logback-classic:1.2.7")
+    implementation("net.logstash.logback:logstash-logback-encoder:7.0.1")
     implementation(Ktor.serverNetty)
     implementation("io.ktor:ktor-server-core:$ktor_version")
     implementation(Konfig.konfig)
     implementation(Kotlin.Logging.kotlinLogging)
     implementation(kotlin("stdlib-jdk8"))
     implementation("io.ktor:ktor-jackson:$ktor_version")
+
+    // Snyk alert: DoS vulnerability in 2.13.0
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.1") {
+        version {
+            strictly("2.13.1")
+        }
+    }
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
     testImplementation(Ktor.ktorTest)
