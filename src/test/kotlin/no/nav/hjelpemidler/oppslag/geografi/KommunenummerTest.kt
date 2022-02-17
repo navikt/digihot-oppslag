@@ -10,8 +10,8 @@ internal class KommunenummerTest {
     @Test
     fun hentKommuneOgFylke() {
         val kommune = kommunenr.hentKommuneOgFylke("3004")
-        Assert.assertEquals("VIKEN", kommune?.fylkenavn)
-        Assert.assertEquals("FREDRIKSTAD", kommune?.kommunenavn)
+        Assert.assertEquals("Viken", kommune?.fylkenavn)
+        Assert.assertEquals("Fredrikstad", kommune?.kommunenavn)
     }
 
     @Test
