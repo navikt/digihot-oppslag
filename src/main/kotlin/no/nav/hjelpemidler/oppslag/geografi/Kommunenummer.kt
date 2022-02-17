@@ -2,6 +2,7 @@ package no.nav.hjelpemidler.oppslag.geografi
 
 import java.io.IOException
 import java.nio.charset.StandardCharsets
+import java.util.Locale
 
 /**
  * Source:
@@ -23,6 +24,14 @@ class Kommunenummer {
         return kommuneTabell.toMap()
     }
 
+    fun String.capitalizeWords() = lowercase().mapIndexed { index, letter ->
+        when {
+            index == 0 -> letter.titlecase(Locale.getDefault())
+            setOf(' ', '-', '(').contains(this[index - 1]) -> letter.titlecase(Locale.getDefault())
+            else -> letter
+        }
+    }.joinToString("").replace(" Og ", " og ")
+
     init {
         // Pga kommunesammenslåing er det duplikater i 2020 kolonnene (pga filen inneholder også linjer for 2019). Duplikater blir bare overskrevet.
         val csvSplitBy = ";"
@@ -31,14 +40,14 @@ class Kommunenummer {
             .skip(1) // Hopp over header på første linje
             .forEach { line ->
                 val splitLine = line.split(csvSplitBy).toTypedArray()
-                val kommunenr: String? = splitLine[6]
-                val kommune: String? = splitLine[7]
-                val fylkenr: String? = splitLine[4]
-                val fylke: String? = splitLine[5]
+                val kommunenr: String = splitLine[6]
+                val kommune: String = splitLine[7].capitalizeWords()
+                val fylkenr: String = splitLine[4]
+                val fylke: String = splitLine[5].capitalizeWords()
 
-                val kommunenrIsValid = kommunenr != null && kommunenr.length == 4 && kommunenr.all { it.isDigit() }
-                if (kommunenrIsValid && kommune != null && fylkenr != null && fylke != null) {
-                    kommuneTabell[kommunenr!!] = KommunenrDto(kommune, fylkenr, fylke)
+                val kommunenrIsValid = kommunenr.length == 4 && kommunenr.all { it.isDigit() }
+                if (kommunenrIsValid) {
+                    kommuneTabell[kommunenr] = KommunenrDto(kommune, fylkenr, fylke)
                 } else {
                     throw IOException("There was an error parsing post data from file $KOMMUNENR_FIL for kommunenr '$kommunenr'")
                 }
