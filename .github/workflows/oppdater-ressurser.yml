@@ -1,0 +1,23 @@
+name: Oppdater postnummertabell osv.
+on:
+  schedule:
+    - cron: '13 3 * * 1' # Kl 03:13 hver mandag
+  push:
+#    branches:
+#      - main
+jobs:
+  oppdater-ressurser:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Oppdater ressursfiler
+      run: |
+        chmod +x ./oppdater-ressurser.sh
+        ./oppdater-ressurser.sh
+    - name: Opprett PR ved endringer
+      uses: peter-evans/create-pull-request@v3
+      with:
+        commit-message: Oppdater ressurser
+        delete-branch: true
+        branch: oppdater-ressurser
+        title: 'Oppdatering av ressursfiler'
