@@ -1,0 +1,19 @@
+name: Oppdater postnummertabell osv.
+on: push
+jobs:
+  oppdater-ressurser:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Oppdater ressursfiler
+      run: |
+        chmod +x ./scripts/oppdater-postnummertabell.sh
+        ./scripts/oppdater-postnummertabell.sh
+    - name: Opprett PR ved endringer
+      uses: peter-evans/create-pull-request@v3
+      with:
+        commit-message: Oppdater ressurser
+        delete-branch: true
+        branch: oppdater-ressurser
+        title: 'Oppdatering av ressursfiler'
