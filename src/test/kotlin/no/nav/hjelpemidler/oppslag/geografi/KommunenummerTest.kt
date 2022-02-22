@@ -14,9 +14,9 @@ internal class KommunenummerTest {
         Assert.assertEquals("Fredrikstad", kommune?.kommunenavn)
 
         kommune = kommunenr.hentKommuneOgFylke("5437")
-        Assert.assertEquals("Troms og Finnmark", kommune?.fylkenavn)
+        Assert.assertEquals("Kontroller stor og liten forbokstav", "Troms og Finnmark", kommune?.fylkenavn)
         Assert.assertEquals("54", kommune?.fylkenummer)
-        Assert.assertEquals("Karasjok", kommune?.kommunenavn)
+        Assert.assertEquals("Bruk norsk variant av navn, ikke samisk.", "Karasjok", kommune?.kommunenavn)
 
         kommune = kommunenr.hentKommuneOgFylke("5442")
         Assert.assertEquals("Nesseby", kommune?.kommunenavn)
@@ -25,7 +25,7 @@ internal class KommunenummerTest {
         Assert.assertEquals("Båtsfjord", kommune?.kommunenavn)
 
         kommune = kommunenr.hentKommuneOgFylke("5444")
-        Assert.assertEquals("Sør-Varanger", kommune?.kommunenavn)
+        Assert.assertEquals("Kontroller stor forbokstav og bindestrek", "Sør-Varanger", kommune?.kommunenavn)
     }
 
     @Test
