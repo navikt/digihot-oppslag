@@ -38,6 +38,7 @@ dependencies {
     implementation(ktor("server-core"))
     implementation(ktor("server-netty"))
     implementation(ktor("jackson"))
+    implementation(ktor("metrics-micrometer"))
 
     // Logging
     implementation("io.github.microutils:kotlin-logging:2.1.21")

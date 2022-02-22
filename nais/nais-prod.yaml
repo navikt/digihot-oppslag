@@ -10,13 +10,16 @@ spec:
   image: {{ image }}
   team: teamdigihot
   liveness:
-    path: /is_alive
+    path: /internal/is_alive
     initialDelay: 30
     timeout: 100
   readiness:
-    path: /is_ready
+    path: /internal/is_ready
     initialDelay: 30
     timeout: 100
+  prometheus:
+    enabled: true
+    path: /internal/metrics
   port: 8080
   replicas:
     max: 2

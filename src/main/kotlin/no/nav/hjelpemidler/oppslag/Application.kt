@@ -29,13 +29,13 @@ fun Application.module() {
     }
 
     install(IgnoreTrailingSlash)
+    internal()
 
     val bydelsnummer = Bydelsnummer()
     val postnummer = Postnummer()
     val kommunenummer = Kommunenummer()
 
     routing {
-        internal()
         route("/api") {
             geografiRoutes(bydelsnummer, postnummer, kommunenummer)
         }
