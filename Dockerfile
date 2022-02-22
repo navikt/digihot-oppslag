@@ -1,4 +1,4 @@
-FROM navikt/java:11
+FROM navikt/java:17
 
-COPY build/libs/digihot-oppslag-all.jar app.jar
+COPY build/libs/digihot-oppslag.jar app.jar
 

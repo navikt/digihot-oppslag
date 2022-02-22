@@ -1,106 +1,89 @@
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
-import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
-val ktor_version = Ktor.version
-val logback_version: String by project
 
 plugins {
     application
-    kotlin("jvm") version Kotlin.version
-    id(Spotless.spotless) version Spotless.version
-    id(Shadow.shadow) version Shadow.version
+    kotlin("jvm") version "1.6.10"
+    id("com.diffplug.spotless") version "6.2.0"
 }
 
 group = "no.nav.hjelpemidler.oppslag"
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-}
-
-apply {
-    plugin(Spotless.spotless)
-}
-
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 application {
     applicationName = "digihot-oppslag"
-    mainClassName = "io.ktor.server.netty.EngineMain"
+    mainClass.set("io.ktor.server.netty.EngineMain")
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
-dependencies {
-    implementation("ch.qos.logback:logback-classic:1.2.7")
-    implementation("net.logstash.logback:logstash-logback-encoder:7.0.1")
-    implementation(Ktor.serverNetty)
-    implementation("io.ktor:ktor-server-core:$ktor_version")
-    implementation(Konfig.konfig)
-    implementation(Kotlin.Logging.kotlinLogging)
-    implementation(kotlin("stdlib-jdk8"))
-    implementation("io.ktor:ktor-jackson:$ktor_version")
+fun ktor(name: String) = "io.ktor:ktor-$name:1.6.7"
 
-    // Snyk alert: DoS vulnerability in 2.13.0
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.1") {
+dependencies {
+    implementation(kotlin("stdlib-jdk8"))
+
+    // Jackson
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.1") { // Snyk alert: DoS vulnerability in 2.13.0
         version {
             strictly("2.13.1")
         }
     }
 
+    // Ktor
+    implementation(ktor("server-core"))
+    implementation(ktor("server-netty"))
+    implementation(ktor("jackson"))
+
+    // Logging
+    implementation("io.github.microutils:kotlin-logging:2.1.21")
+    runtimeOnly("ch.qos.logback:logback-classic:1.2.10")
+    runtimeOnly("net.logstash.logback:logstash-logback-encoder:7.0.1")
+
+    implementation("com.natpryce:konfig:1.6.10.0")
+    implementation("io.micrometer:micrometer-registry-prometheus:1.8.2")
+
+    // Test
+    testImplementation(kotlin("test"))
+    testImplementation(ktor("server-test-host"))
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
-    testImplementation(Ktor.ktorTest)
-    testImplementation(Mockk.mockk)
+    testImplementation("io.mockk:mockk:1.12.2")
 }
 
 spotless {
     kotlin {
-        ktlint(Ktlint.version)
+        ktlint()
+        targetExclude("**/generated/**")
     }
     kotlinGradle {
-        target("*.gradle.kts", "buildSrc/*.gradle.kts")
-        ktlint(Ktlint.version)
+        target("*.gradle.kts")
+        ktlint()
     }
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.freeCompilerArgs = listOf()
-    kotlinOptions.jvmTarget = "11"
+    dependsOn("spotlessApply")
+    dependsOn("spotlessCheck")
+
+    kotlinOptions.jvmTarget = "17"
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
-    testLogging {
-        showExceptions = true
-        showStackTraces = true
-        showStandardStreams = true
-        outputs.upToDateWhen { false }
-        exceptionFormat = TestExceptionFormat.FULL
-        events = setOf(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
+}
+
+tasks.withType<Jar> {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    manifest {
+        attributes["Main-Class"] = application.mainClass
     }
-}
-
-tasks.withType<Wrapper> {
-    gradleVersion = "7.2"
-}
-
-tasks.named("shadowJar") {
-    dependsOn("test")
-}
-
-tasks.named("jar") {
-    dependsOn("test")
-}
-
-tasks.named("compileKotlin") {
-    dependsOn("spotlessApply")
-    dependsOn("spotlessCheck")
+    from(
+        configurations.runtimeClasspath.get().map {
+            if (it.isDirectory) it else zipTree(it)
+        }
+    )
 }
