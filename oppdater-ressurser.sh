@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#
+# Bydel
+#
+# Mer informasjon om [SSB-kilden](https://data.norge.no/datasets/44f30e8d-b653-4463-9e78-73aa7fbcfdf0).
+curl https://data.ssb.no/api/klass/v1/versions/1168.json | jq -r '.classificationItems[] | .code + ";" + .name' > src/main/resources/geografi/bydelsnr.csv
+
+#
+# Kommunenr
+#
+# Kilde: https://ws.geonorge.no/kommuneinfo/v1/#/default/get_fylkerkommuner
+curl https://ws.geonorge.no/kommuneinfo/v1/fylkerkommuner | jq -r '.[].kommuner[] | .fylkesnummer + ";" + .fylkesnavn + ";" + .kommunenummer + ";" + .kommunenavnNorsk' > src/main/resources/geografi/kommunenr.csv
+
+#
+# Postnummer
+#
+# Dette er en ANSI-encoded fil med tabs og Windows style newlines. Vi ønsker UTF-8-encoding og Unix newlines.
+# Sjekk diff, og verifiser at det ikke er noe fundamentalt galt med fila eller formatet.
+curl https://www.bring.no/postnummerregister-ansi.txt | iconv -f iso-8859-1 -t utf-8 | tr -d \\r > src/main/resources/geografi/postal_codes_no.tsv
