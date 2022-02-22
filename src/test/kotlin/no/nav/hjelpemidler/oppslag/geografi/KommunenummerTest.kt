@@ -9,9 +9,23 @@ internal class KommunenummerTest {
 
     @Test
     fun hentKommuneOgFylke() {
-        val kommune = kommunenr.hentKommuneOgFylke("3004")
+        var kommune = kommunenr.hentKommuneOgFylke("3004")
         Assert.assertEquals("Viken", kommune?.fylkenavn)
         Assert.assertEquals("Fredrikstad", kommune?.kommunenavn)
+
+        kommune = kommunenr.hentKommuneOgFylke("5437")
+        Assert.assertEquals("Troms og Finnmark", kommune?.fylkenavn)
+        Assert.assertEquals("54", kommune?.fylkenummer)
+        Assert.assertEquals("Karasjok", kommune?.kommunenavn)
+
+        kommune = kommunenr.hentKommuneOgFylke("5442")
+        Assert.assertEquals("Nesseby", kommune?.kommunenavn)
+
+        kommune = kommunenr.hentKommuneOgFylke("5443")
+        Assert.assertEquals("Båtsfjord", kommune?.kommunenavn)
+
+        kommune = kommunenr.hentKommuneOgFylke("5444")
+        Assert.assertEquals("Sør-Varanger", kommune?.kommunenavn)
     }
 
     @Test
