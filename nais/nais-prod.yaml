@@ -30,6 +30,7 @@ spec:
         - application: hm-saksberiker
         - application: hm-soknad-api
         - application: hm-soknadsbehandling
+        - application: hm-saksbehandling
   resources:
     limits:
       cpu: 500m
