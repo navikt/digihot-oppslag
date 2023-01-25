@@ -1,7 +1,7 @@
 package no.nav.hjelpemidler.oppslag.geografi
 
-import org.junit.Assert
-import org.junit.jupiter.api.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class KommunenummerTest {
 
@@ -10,27 +10,27 @@ internal class KommunenummerTest {
     @Test
     fun hentKommuneOgFylke() {
         var kommune = kommunenr.hentKommuneOgFylke("3004")
-        Assert.assertEquals("Viken", kommune?.fylkenavn)
-        Assert.assertEquals("Fredrikstad", kommune?.kommunenavn)
+        assertEquals("Viken", kommune?.fylkenavn)
+        assertEquals("Fredrikstad", kommune?.kommunenavn)
 
         kommune = kommunenr.hentKommuneOgFylke("5437")
-        Assert.assertEquals("Kontroller stor og liten forbokstav", "Troms og Finnmark", kommune?.fylkenavn)
-        Assert.assertEquals("54", kommune?.fylkenummer)
-        Assert.assertEquals("Bruk norsk variant av navn, ikke samisk.", "Karasjok", kommune?.kommunenavn)
+        assertEquals("Troms og Finnmark", kommune?.fylkenavn, "Kontroller stor og liten forbokstav")
+        assertEquals("54", kommune?.fylkenummer)
+        assertEquals("Karasjok", kommune?.kommunenavn, "Bruk norsk variant av navn, ikke samisk.")
 
         kommune = kommunenr.hentKommuneOgFylke("5442")
-        Assert.assertEquals("Nesseby", kommune?.kommunenavn)
+        assertEquals("Nesseby", kommune?.kommunenavn)
 
         kommune = kommunenr.hentKommuneOgFylke("5443")
-        Assert.assertEquals("Båtsfjord", kommune?.kommunenavn)
+        assertEquals("Båtsfjord", kommune?.kommunenavn)
 
         kommune = kommunenr.hentKommuneOgFylke("5444")
-        Assert.assertEquals("Kontroller stor forbokstav og bindestrek", "Sør-Varanger", kommune?.kommunenavn)
+        assertEquals("Sør-Varanger", kommune?.kommunenavn, "Kontroller stor forbokstav og bindestrek")
     }
 
     @Test
     fun hentAlleKommuner() {
         val antallKommuner = kommunenr.hentAlleKommuner().size
-        Assert.assertEquals(356, antallKommuner)
+        assertEquals(356, antallKommuner)
     }
 }

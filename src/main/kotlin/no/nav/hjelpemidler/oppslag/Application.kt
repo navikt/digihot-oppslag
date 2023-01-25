@@ -1,24 +1,23 @@
 package no.nav.hjelpemidler.oppslag
 
-import io.ktor.application.Application
-import io.ktor.application.install
-import io.ktor.features.CallLogging
-import io.ktor.features.ContentNegotiation
-import io.ktor.jackson.jackson
-import io.ktor.request.path
-import io.ktor.routing.IgnoreTrailingSlash
-import io.ktor.routing.route
-import io.ktor.routing.routing
+import io.ktor.serialization.jackson.jackson
+import io.ktor.server.application.Application
+import io.ktor.server.application.install
+import io.ktor.server.plugins.callloging.CallLogging
+import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.server.request.path
+import io.ktor.server.routing.IgnoreTrailingSlash
+import io.ktor.server.routing.route
+import io.ktor.server.routing.routing
 import no.nav.hjelpemidler.oppslag.geografi.Bydelsnummer
 import no.nav.hjelpemidler.oppslag.geografi.Kommunenummer
 import no.nav.hjelpemidler.oppslag.geografi.Postnummer
 import no.nav.hjelpemidler.oppslag.geografi.geografiRoutes
 import org.slf4j.event.Level
 
-fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+fun main(args: Array<String>): Unit = io.ktor.server.cio.EngineMain.main(args)
 
 fun Application.module() {
-
     install(ContentNegotiation) {
         jackson()
     }

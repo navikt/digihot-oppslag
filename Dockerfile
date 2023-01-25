@@ -1,4 +1,2 @@
 FROM ghcr.io/navikt/baseimages/temurin:17
-
-COPY build/libs/digihot-oppslag.jar app.jar
-
+COPY build/libs/digihot-oppslag-all.jar app.jar

@@ -1,7 +1,8 @@
 package no.nav.hjelpemidler.oppslag.geografi
 
-import org.junit.Assert
-import org.junit.jupiter.api.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 internal class PostnummerTest {
 
@@ -10,13 +11,13 @@ internal class PostnummerTest {
     @Test
     fun hentPoststed() {
         val poststed = postnummer.hentPoststed("0010")?.poststed
-        Assert.assertEquals("OSLO", poststed)
+        assertEquals("OSLO", poststed)
     }
 
     @Test
     fun hentAllePoststeder() {
         val antallPoststeder = postnummer.hentAllePoststeder().size
         println("Antall poststeder: $antallPoststeder")
-        Assert.assertTrue(antallPoststeder > 5000)
+        assertTrue(antallPoststeder > 5000)
     }
 }

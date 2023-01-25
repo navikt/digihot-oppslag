@@ -1,7 +1,7 @@
 package no.nav.hjelpemidler.oppslag.geografi
 
-import org.junit.Assert
-import org.junit.jupiter.api.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class BydelsnummerTest {
 
@@ -10,12 +10,12 @@ internal class BydelsnummerTest {
     @Test
     fun hentBydel() {
         val bydel = bydelsnummer.hentBydel("030105")?.bydelsnavn
-        Assert.assertEquals("Frogner", bydel)
+        assertEquals("Frogner", bydel)
     }
 
     @Test
     fun hentAlleBydeler() {
         val antallBydeler = bydelsnummer.hentAlleBydeler().size
-        Assert.assertEquals(38, antallBydeler)
+        assertEquals(38, antallBydeler)
     }
 }
