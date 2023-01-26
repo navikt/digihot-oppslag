@@ -17,10 +17,10 @@ import io.micrometer.prometheus.PrometheusConfig
 import io.micrometer.prometheus.PrometheusMeterRegistry
 
 fun Application.internal() {
-    val appMicrometerRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
+    val prometheusMeterRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
 
     install(MicrometerMetrics) {
-        registry = appMicrometerRegistry
+        registry = prometheusMeterRegistry
         meterBinders = listOf(
             JvmMemoryMetrics(),
             JvmGcMetrics(),
@@ -31,7 +31,7 @@ fun Application.internal() {
     routing {
         route("/internal") {
             get("/metrics") {
-                call.respond(appMicrometerRegistry.scrape())
+                call.respond(prometheusMeterRegistry.scrape())
             }
 
             get("/is_alive") {

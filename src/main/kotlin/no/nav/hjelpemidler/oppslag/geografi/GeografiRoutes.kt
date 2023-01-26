@@ -5,61 +5,86 @@ import io.ktor.server.application.call
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.get
+import io.ktor.server.routing.route
 import mu.KotlinLogging
 
-private val logger = KotlinLogging.logger {}
+private val log = KotlinLogging.logger {}
 
-internal fun Route.geografiRoutes(bydelsnummer: Bydelsnummer, postnummer: Postnummer, kommunenummer: Kommunenummer) {
-    get("/geografi/bydelsnr") {
-        call.respond(bydelsnummer.hentAlleBydeler())
-    }
+fun Route.geografiRoutes(bydeler: Bydeler, kommuner: Kommuner, poststeder: Poststeder) {
+    route("/geografi") {
+        route("/bydeler") {
+            bydelerRoutes(bydeler)
+        }
+        // fixme -> fjern og bruk "/bydeler"
+        route("/bydelsnr") {
+            bydelerRoutes(bydeler)
+        }
 
-    get("/geografi/bydelsnr/{bydelsnr}") {
-        val bydelsnr = call.parameters["bydelsnr"]
-        try {
-            if (bydelsnr != null && bydelsnr.length == 6 && bydelsnr.all { it.isDigit() }) {
-                call.respond(bydelsnummer.hentBydel(bydelsnr)!!)
-            } else {
-                throw RuntimeException("Feil ved oppslag på ugyldig bydelsnr $bydelsnr")
-            }
-        } catch (e: Exception) {
-            logger.error(e) { "Feilet ved oppslag på bydelsnr $bydelsnr" }
-            call.respond(HttpStatusCode.BadRequest, "Feil ved oppslag på bydelsnr $bydelsnr")
+        route("/kommuner") {
+            kommunerRoutes(kommuner)
+        }
+        // fixme -> fjern og bruk "/kommuner"
+        route("/kommunenr") {
+            kommunerRoutes(kommuner)
+        }
+
+        route("/poststeder") {
+            poststederRoutes(poststeder)
+        }
+        // fixme -> fjern og bruk "/poststeder"
+        route("/postnr") {
+            poststederRoutes(poststeder)
         }
     }
+}
 
-    get("/geografi/postnr") {
-        call.respond(postnummer.hentAllePoststeder())
+private fun Route.bydelerRoutes(bydeler: Bydeler) {
+    get {
+        call.respond(bydeler.toMap())
     }
-    get("/geografi/postnr/{postnr}") {
-        val postnr = call.parameters["postnr"]
+    get("/{bydelsnummer}") {
         try {
-            if (postnr != null && postnr.length == 4 && postnr.all { it.isDigit() }) {
-                call.respond(postnummer.hentPoststed(postnr)!!)
-            } else {
-                throw RuntimeException("Feil ved oppslag på ugyldig postnr $postnr")
-            }
-        } catch (e: Exception) {
-            logger.error(e) { "Feil ved oppslag på postnr $postnr" }
-            call.respond(HttpStatusCode.BadRequest, "Feil ved oppslag på postnr $postnr")
+            val bydelsnummer = call
+                .parameters["bydelsnummer"]
+                .requireNumberWithLength(6)
+            call.respond(bydeler[bydelsnummer])
+        } catch (e: IllegalArgumentException) {
+            log.error(e) { "Ugyldig input i URL" }
+            call.respond(HttpStatusCode.BadRequest)
         }
     }
+}
 
-    get("/geografi/kommunenr") {
-        call.respond(kommunenummer.hentAlleKommuner())
+private fun Route.kommunerRoutes(kommuner: Kommuner) {
+    get {
+        call.respond(kommuner.toMap())
     }
-
-    get("/geografi/kommunenr/{kommunenr}") {
-        val kommunenr = call.parameters["kommunenr"]
+    get("/{kommunenummer}") {
         try {
-            if (kommunenr != null && kommunenr.length == 4 && kommunenr.all { it.isDigit() }) {
-                call.respond(kommunenummer.hentKommuneOgFylke(kommunenr)!!)
-            } else {
-                throw RuntimeException("Feil ved oppslag på ugyldig kommunenr $kommunenr")
-            }
-        } catch (e: Exception) {
-            logger.error(e) { "Feilet ved oppslag på kommunenr $kommunenr" }
-            call.respond(HttpStatusCode.BadRequest, "Feil ved oppslag på kommunenr $kommunenr")
+            val kommunenummer = call
+                .parameters["kommunenummer"]
+                .requireNumberWithLength(4)
+            call.respond(kommuner[kommunenummer])
+        } catch (e: IllegalArgumentException) {
+            log.error(e) { "Ugyldig input i URL" }
+            call.respond(HttpStatusCode.BadRequest)
+        }
+    }
+}
+
+private fun Route.poststederRoutes(poststeder: Poststeder) {
+    get {
+        call.respond(poststeder.toMap())
+    }
+    get("/{postnummer}") {
+        try {
+            val postnummer = call
+                .parameters["postnummer"]
+                .requireNumberWithLength(4)
+            call.respond(poststeder[postnummer])
+        } catch (e: IllegalArgumentException) {
+            log.error(e) { "Ugyldig input i URL" }
+            call.respond(HttpStatusCode.BadRequest)
         }
     }
 }

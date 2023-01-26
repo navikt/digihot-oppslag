@@ -1,0 +1,277 @@
+openapi: "3.0.3"
+info:
+  title: "DigiHoT Oppslag"
+  description: "DigiHoT Oppslag"
+  version: "1.0.0"
+servers:
+- url: "http://localhost:8083"
+- url: "https://digihot-oppslag.dev.intern.nav.no"
+paths:
+  /internal/is_alive:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            text/plain:
+              schema:
+                type: "string"
+              examples:
+                Example#1:
+                  value: "ALIVE"
+  /internal/is_ready:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            text/plain:
+              schema:
+                type: "string"
+              examples:
+                Example#1:
+                  value: "READY"
+  /internal/metrics:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+  /api/geografi/bydeler:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Map"
+  /api/geografi/bydeler/{bydelsnummer}:
+    get:
+      description: ""
+      parameters:
+      - name: "bydelsnummer"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/BydelDto"
+        "400":
+          description: "Bad Request"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /api/geografi/bydelsnr:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Map"
+  /api/geografi/bydelsnr/{bydelsnummer}:
+    get:
+      description: ""
+      parameters:
+      - name: "bydelsnummer"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/BydelDto"
+        "400":
+          description: "Bad Request"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /api/geografi/kommunenr:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Map"
+  /api/geografi/kommunenr/{kommunenummer}:
+    get:
+      description: ""
+      parameters:
+      - name: "kommunenummer"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/KommuneDto"
+        "400":
+          description: "Bad Request"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /api/geografi/kommuner:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Map"
+  /api/geografi/kommuner/{kommunenummer}:
+    get:
+      description: ""
+      parameters:
+      - name: "kommunenummer"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/KommuneDto"
+        "400":
+          description: "Bad Request"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /api/geografi/postnr:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Map"
+  /api/geografi/postnr/{postnummer}:
+    get:
+      description: ""
+      parameters:
+      - name: "postnummer"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PoststedDto"
+        "400":
+          description: "Bad Request"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /api/geografi/poststeder:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Map"
+  /api/geografi/poststeder/{postnummer}:
+    get:
+      description: ""
+      parameters:
+      - name: "postnummer"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PoststedDto"
+        "400":
+          description: "Bad Request"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+components:
+  schemas:
+    Map:
+      type: "object"
+      properties: {}
+    BydelDto:
+      type: "object"
+      properties:
+        bydelsnummer:
+          type: "string"
+        bydelsnavn:
+          type: "string"
+    KommuneDto:
+      type: "object"
+      properties:
+        fylkesnummer:
+          type: "string"
+        fylkesnavn:
+          type: "string"
+        kommunenummer:
+          type: "string"
+        kommunenavn:
+          type: "string"
+        fylkenummer:
+          type: "string"
+        fylkenavn:
+          type: "string"
+    PoststedDto:
+      type: "object"
+      properties:
+        postnummer:
+          type: "string"
+        poststed:
+          type: "string"
+        kommunenummer:
+          type: "string"
+        kommunenavn:
+          type: "string"
+        kommunenr:
+          type: "string"

@@ -29,10 +29,15 @@ dependencies {
     implementation(ktor("server-content-negotiation"))
     implementation(ktor("server-call-logging"))
     implementation(ktor("server-metrics-micrometer"))
+    implementation(ktor("server-swagger"))
     implementation(ktor("serialization-jackson"))
+
+    // Jackson
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.14.1")
 
     // Logging
     implementation("io.github.microutils:kotlin-logging:3.0.4")
+    implementation("io.ktor:ktor-server-cors-jvm:2.2.2")
     runtimeOnly("ch.qos.logback:logback-classic:1.4.5")
     runtimeOnly("net.logstash.logback:logstash-logback-encoder:7.2")
 
