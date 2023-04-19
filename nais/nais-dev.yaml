@@ -18,7 +18,7 @@ spec:
     initialDelay: 30
     timeout: 100
   ingresses:
-    - https://digihot-oppslag.dev.intern.nav.no
+    - https://digihot-oppslag.intern.dev.nav.no
   prometheus:
     enabled: true
     path: /internal/metrics
