@@ -5,7 +5,7 @@ info:
   version: "1.0.0"
 servers:
 - url: "http://localhost:8083"
-- url: "https://digihot-oppslag.dev.intern.nav.no"
+- url: "https://digihot-oppslag.intern.dev.nav.no"
 paths:
   /internal/is_alive:
     get:
