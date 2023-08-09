@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     application
-    kotlin("jvm") version "1.8.0"
+    kotlin("jvm") version "1.9.0"
     id("com.diffplug.spotless") version "6.13.0"
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
@@ -20,10 +20,10 @@ application {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("io.micrometer:micrometer-registry-prometheus:1.10.3")
+    implementation("io.micrometer:micrometer-registry-prometheus:1.10.5")
 
     // Ktor
-    fun ktor(name: String) = "io.ktor:ktor-$name:2.2.2"
+    fun ktor(name: String) = "io.ktor:ktor-$name:2.3.3"
     implementation(ktor("server-core"))
     implementation(ktor("server-cio"))
     implementation(ktor("server-content-negotiation"))
@@ -33,11 +33,11 @@ dependencies {
     implementation(ktor("serialization-jackson"))
 
     // Jackson
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.14.1")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.14.2")
 
     // Logging
-    implementation("io.github.microutils:kotlin-logging:3.0.4")
-    implementation("io.ktor:ktor-server-cors-jvm:2.2.2")
+    implementation("io.github.microutils:kotlin-logging:3.0.5")
+    implementation(ktor("server-cors-jvm"))
     runtimeOnly("ch.qos.logback:logback-classic:1.4.5")
     runtimeOnly("net.logstash.logback:logstash-logback-encoder:7.2")
 
