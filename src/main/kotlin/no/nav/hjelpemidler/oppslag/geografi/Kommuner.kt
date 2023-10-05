@@ -35,9 +35,9 @@ data class KommuneCsv(
     val kommunenavn: String,
 ) {
     init {
-        fylkesnummer.requireNumberWithLength(2)
+        fylkesnummer.requireNumberWithLength(FYLKESNUMMER_LENGDE)
         require(fylkesnavn.isNotBlank())
-        kommunenummer.requireNumberWithLength(4)
+        kommunenummer.requireNumberWithLength(KOMMUNENUMMER_LENGDE)
         require(kommunenavn.isNotBlank())
     }
 

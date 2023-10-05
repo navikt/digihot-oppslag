@@ -34,7 +34,7 @@ data class BydelCsv(
     val bydelsnavn: String,
 ) {
     init {
-        bydelsnummer.requireNumberWithLength(6)
+        bydelsnummer.requireNumberWithLength(BYDELSNUMMER_LENGDE)
         require(bydelsnavn.isNotBlank())
     }
 

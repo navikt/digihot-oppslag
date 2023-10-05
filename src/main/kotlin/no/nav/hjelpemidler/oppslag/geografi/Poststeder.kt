@@ -35,9 +35,9 @@ data class PoststedCsv(
     val kategori: String,
 ) {
     init {
-        postnummer.requireNumberWithLength(4)
+        postnummer.requireNumberWithLength(POSTNUMMER_LENGDE)
         require(poststed.isNotBlank())
-        kommunenummer.requireNumberWithLength(4)
+        kommunenummer.requireNumberWithLength(KOMMUNENUMMER_LENGDE)
         require(kommunenavn.isNotBlank())
         require(kategori.isNotBlank() && kategori.length == 1)
     }

@@ -46,7 +46,7 @@ private fun Route.bydelerRoutes(bydeler: Bydeler) {
         try {
             val bydelsnummer = call
                 .parameters["bydelsnummer"]
-                .requireNumberWithLength(6)
+                .requireNumberWithLength(BYDELSNUMMER_LENGDE)
             call.respond(bydeler[bydelsnummer])
         } catch (e: IllegalArgumentException) {
             log.error(e) { "Ugyldig input i URL" }
@@ -63,7 +63,7 @@ private fun Route.kommunerRoutes(kommuner: Kommuner) {
         try {
             val kommunenummer = call
                 .parameters["kommunenummer"]
-                .requireNumberWithLength(4)
+                .requireNumberWithLength(KOMMUNENUMMER_LENGDE)
             call.respond(kommuner[kommunenummer])
         } catch (e: IllegalArgumentException) {
             log.error(e) { "Ugyldig input i URL" }
@@ -80,7 +80,7 @@ private fun Route.poststederRoutes(poststeder: Poststeder) {
         try {
             val postnummer = call
                 .parameters["postnummer"]
-                .requireNumberWithLength(4)
+                .requireNumberWithLength(POSTNUMMER_LENGDE)
             call.respond(poststeder[postnummer])
         } catch (e: IllegalArgumentException) {
             log.error(e) { "Ugyldig input i URL" }
