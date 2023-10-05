@@ -1,11 +1,7 @@
 03;Oslo;0301;Oslo
-11;Rogaland;1106;Haugesund
-11;Rogaland;1134;Suldal
-11;Rogaland;1135;Sauda
-11;Rogaland;1160;Vindafjord
-11;Rogaland;1146;Tysvær
 11;Rogaland;1101;Eigersund
 11;Rogaland;1103;Stavanger
+11;Rogaland;1106;Haugesund
 11;Rogaland;1108;Sandnes
 11;Rogaland;1111;Sokndal
 11;Rogaland;1112;Lund
@@ -18,10 +14,14 @@
 11;Rogaland;1127;Randaberg
 11;Rogaland;1130;Strand
 11;Rogaland;1133;Hjelmeland
+11;Rogaland;1134;Suldal
+11;Rogaland;1135;Sauda
 11;Rogaland;1144;Kvitsøy
 11;Rogaland;1145;Bokn
+11;Rogaland;1146;Tysvær
 11;Rogaland;1149;Karmøy
 11;Rogaland;1151;Utsira
+11;Rogaland;1160;Vindafjord
 15;Møre og Romsdal;1505;Kristiansund
 15;Møre og Romsdal;1506;Molde
 15;Møre og Romsdal;1507;Ålesund
@@ -133,13 +133,13 @@
 30;Viken;3052;Nore og Uvdal
 30;Viken;3053;Jevnaker
 30;Viken;3054;Lunner
-30;Viken;3016;Rakkestad
-30;Viken;3017;Råde
 30;Viken;3001;Halden
 30;Viken;3003;Sarpsborg
 30;Viken;3004;Fredrikstad
 30;Viken;3011;Hvaler
 30;Viken;3012;Aremark
+30;Viken;3016;Rakkestad
+30;Viken;3017;Råde
 34;Innlandet;3401;Kongsvinger
 34;Innlandet;3403;Hamar
 34;Innlandet;3405;Lillehammer
@@ -159,13 +159,9 @@
 34;Innlandet;3423;Stor-Elvdal
 34;Innlandet;3424;Rendalen
 34;Innlandet;3425;Engerdal
-34;Innlandet;3426;Tolga
-34;Innlandet;3427;Tynset
 34;Innlandet;3428;Alvdal
 34;Innlandet;3429;Folldal
-34;Innlandet;3430;Os
 34;Innlandet;3431;Dovre
-34;Innlandet;3432;Lesja
 34;Innlandet;3433;Skjåk
 34;Innlandet;3434;Lom
 34;Innlandet;3435;Vågå
@@ -186,6 +182,10 @@
 34;Innlandet;3452;Vestre Slidre
 34;Innlandet;3453;Øystre Slidre
 34;Innlandet;3454;Vang
+34;Innlandet;3426;Tolga
+34;Innlandet;3427;Tynset
+34;Innlandet;3430;Os
+34;Innlandet;3432;Lesja
 38;Vestfold og Telemark;3802;Holmestrand
 38;Vestfold og Telemark;3808;Notodden
 38;Vestfold og Telemark;3817;Midt-Telemark
@@ -197,26 +197,30 @@
 38;Vestfold og Telemark;3825;Vinje
 38;Vestfold og Telemark;3801;Horten
 38;Vestfold og Telemark;3803;Tønsberg
-38;Vestfold og Telemark;3812;Siljan
 38;Vestfold og Telemark;3804;Sandefjord
 38;Vestfold og Telemark;3805;Larvik
 38;Vestfold og Telemark;3806;Porsgrunn
 38;Vestfold og Telemark;3807;Skien
 38;Vestfold og Telemark;3811;Færder
+38;Vestfold og Telemark;3812;Siljan
 38;Vestfold og Telemark;3813;Bamble
 38;Vestfold og Telemark;3814;Kragerø
 38;Vestfold og Telemark;3815;Drangedal
 38;Vestfold og Telemark;3816;Nome
 38;Vestfold og Telemark;3822;Nissedal
 38;Vestfold og Telemark;3823;Fyresdal
+42;Agder;4206;Farsund
+42;Agder;4207;Flekkefjord
 42;Agder;4222;Bykle
+42;Agder;4225;Lyngdal
+42;Agder;4226;Hægebostad
+42;Agder;4227;Kvinesdal
+42;Agder;4228;Sirdal
 42;Agder;4201;Risør
 42;Agder;4202;Grimstad
 42;Agder;4203;Arendal
 42;Agder;4204;Kristiansand
 42;Agder;4205;Lindesnes
-42;Agder;4206;Farsund
-42;Agder;4207;Flekkefjord
 42;Agder;4211;Gjerstad
 42;Agder;4212;Vegårshei
 42;Agder;4213;Tvedestrand
@@ -230,10 +234,6 @@
 42;Agder;4221;Valle
 42;Agder;4223;Vennesla
 42;Agder;4224;Åseral
-42;Agder;4225;Lyngdal
-42;Agder;4226;Hægebostad
-42;Agder;4227;Kvinesdal
-42;Agder;4228;Sirdal
 46;Vestland;4601;Bergen
 46;Vestland;4602;Kinn
 46;Vestland;4611;Etne
@@ -267,9 +267,6 @@
 46;Vestland;4639;Vik
 46;Vestland;4640;Sogndal
 46;Vestland;4641;Aurland
-46;Vestland;4642;Lærdal
-46;Vestland;4643;Årdal
-46;Vestland;4644;Luster
 46;Vestland;4645;Askvoll
 46;Vestland;4646;Fjaler
 46;Vestland;4647;Sunnfjord
@@ -277,16 +274,28 @@
 46;Vestland;4649;Stad
 46;Vestland;4650;Gloppen
 46;Vestland;4651;Stryn
-50;Trøndelag;5043;Røyrvik
-50;Trøndelag;5044;Namsskogan
-50;Trøndelag;5046;Høylandet
-50;Trøndelag;5052;Leka
-50;Trøndelag;5060;Nærøysund
-50;Trøndelag;5001;Trondheim
+46;Vestland;4642;Lærdal
+46;Vestland;4643;Årdal
+46;Vestland;4644;Luster
 50;Trøndelag;5006;Steinkjer
 50;Trøndelag;5007;Namsos
 50;Trøndelag;5014;Frøya
 50;Trøndelag;5020;Osen
+50;Trøndelag;5038;Verdal
+50;Trøndelag;5041;Snåsa
+50;Trøndelag;5042;Lierne
+50;Trøndelag;5043;Røyrvik
+50;Trøndelag;5044;Namsskogan
+50;Trøndelag;5045;Grong
+50;Trøndelag;5046;Høylandet
+50;Trøndelag;5047;Overhalla
+50;Trøndelag;5049;Flatanger
+50;Trøndelag;5052;Leka
+50;Trøndelag;5053;Inderøy
+50;Trøndelag;5057;Ørland
+50;Trøndelag;5058;Åfjord
+50;Trøndelag;5060;Nærøysund
+50;Trøndelag;5001;Trondheim
 50;Trøndelag;5021;Oppdal
 50;Trøndelag;5022;Rennebu
 50;Trøndelag;5025;Røros
@@ -301,18 +310,9 @@
 50;Trøndelag;5035;Stjørdal
 50;Trøndelag;5036;Frosta
 50;Trøndelag;5037;Levanger
-50;Trøndelag;5038;Verdal
-50;Trøndelag;5041;Snåsa
-50;Trøndelag;5042;Lierne
-50;Trøndelag;5045;Grong
-50;Trøndelag;5047;Overhalla
-50;Trøndelag;5049;Flatanger
-50;Trøndelag;5053;Inderøy
 50;Trøndelag;5054;Indre Fosen
 50;Trøndelag;5055;Heim
 50;Trøndelag;5056;Hitra
-50;Trøndelag;5057;Ørland
-50;Trøndelag;5058;Åfjord
 50;Trøndelag;5059;Orkland
 50;Trøndelag;5061;Rindal
 54;Troms og Finnmark;5401;Tromsø
