@@ -6,11 +6,12 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import com.fasterxml.jackson.module.kotlin.kotlinModule
 
-val csvMapper: CsvMapper = CsvMapper.builder()
-    .addModule(kotlinModule())
-    .enable(CsvParser.Feature.TRIM_SPACES)
-    .enable(CsvParser.Feature.SKIP_EMPTY_LINES)
-    .build()
+val csvMapper: CsvMapper =
+    CsvMapper.builder()
+        .addModule(kotlinModule())
+        .enable(CsvParser.Feature.TRIM_SPACES)
+        .enable(CsvParser.Feature.SKIP_EMPTY_LINES)
+        .build()
 
 inline fun <reified T : Any> readCsv(
     name: String,

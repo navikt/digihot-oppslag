@@ -42,12 +42,13 @@ data class PoststedCsv(
         require(kategori.isNotBlank() && kategori.length == 1)
     }
 
-    fun toDto(): PoststedDto = PoststedDto(
-        postnummer = postnummer,
-        poststed = poststed,
-        kommunenummer = kommunenummer,
-        kommunenavn = kommunenavn,
-    )
+    fun toDto(): PoststedDto =
+        PoststedDto(
+            postnummer = postnummer,
+            poststed = poststed,
+            kommunenummer = kommunenummer,
+            kommunenavn = kommunenavn,
+        )
 }
 
 data class PoststedDto(

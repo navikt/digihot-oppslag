@@ -3,7 +3,7 @@ package no.nav.hjelpemidler.oppslag.geografi
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-internal class BydelerTest {
+class BydelerTest {
     private val bydeler = Bydeler()
 
     @Test

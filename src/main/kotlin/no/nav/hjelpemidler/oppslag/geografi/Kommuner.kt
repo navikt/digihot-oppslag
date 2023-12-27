@@ -41,12 +41,13 @@ data class KommuneCsv(
         require(kommunenavn.isNotBlank())
     }
 
-    fun toDto(): KommuneDto = KommuneDto(
-        fylkesnummer = fylkesnummer,
-        fylkesnavn = fylkesnavn,
-        kommunenummer = kommunenummer,
-        kommunenavn = kommunenavn,
-    )
+    fun toDto(): KommuneDto =
+        KommuneDto(
+            fylkesnummer = fylkesnummer,
+            fylkesnavn = fylkesnavn,
+            kommunenummer = kommunenummer,
+            kommunenavn = kommunenavn,
+        )
 }
 
 data class KommuneDto(

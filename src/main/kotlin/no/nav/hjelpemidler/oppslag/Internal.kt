@@ -21,11 +21,12 @@ fun Application.internal() {
 
     install(MicrometerMetrics) {
         registry = prometheusMeterRegistry
-        meterBinders = listOf(
-            JvmMemoryMetrics(),
-            JvmGcMetrics(),
-            ProcessorMetrics(),
-        )
+        meterBinders =
+            listOf(
+                JvmMemoryMetrics(),
+                JvmGcMetrics(),
+                ProcessorMetrics(),
+            )
     }
 
     routing {

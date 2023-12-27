@@ -10,7 +10,11 @@ import mu.KotlinLogging
 
 private val log = KotlinLogging.logger {}
 
-fun Route.geografiRoutes(bydeler: Bydeler, kommuner: Kommuner, poststeder: Poststeder) {
+fun Route.geografiRoutes(
+    bydeler: Bydeler,
+    kommuner: Kommuner,
+    poststeder: Poststeder,
+) {
     route("/geografi") {
         route("/bydeler") {
             bydelerRoutes(bydeler)
@@ -44,9 +48,10 @@ private fun Route.bydelerRoutes(bydeler: Bydeler) {
     }
     get("/{bydelsnummer}") {
         try {
-            val bydelsnummer = call
-                .parameters["bydelsnummer"]
-                .requireNumberWithLength(BYDELSNUMMER_LENGDE)
+            val bydelsnummer =
+                call
+                    .parameters["bydelsnummer"]
+                    .requireNumberWithLength(BYDELSNUMMER_LENGDE)
             call.respond(bydeler[bydelsnummer])
         } catch (e: IllegalArgumentException) {
             log.error(e) { "Ugyldig input i URL" }
@@ -61,9 +66,10 @@ private fun Route.kommunerRoutes(kommuner: Kommuner) {
     }
     get("/{kommunenummer}") {
         try {
-            val kommunenummer = call
-                .parameters["kommunenummer"]
-                .requireNumberWithLength(KOMMUNENUMMER_LENGDE)
+            val kommunenummer =
+                call
+                    .parameters["kommunenummer"]
+                    .requireNumberWithLength(KOMMUNENUMMER_LENGDE)
             call.respond(kommuner[kommunenummer])
         } catch (e: IllegalArgumentException) {
             log.error(e) { "Ugyldig input i URL" }
@@ -78,9 +84,10 @@ private fun Route.poststederRoutes(poststeder: Poststeder) {
     }
     get("/{postnummer}") {
         try {
-            val postnummer = call
-                .parameters["postnummer"]
-                .requireNumberWithLength(POSTNUMMER_LENGDE)
+            val postnummer =
+                call
+                    .parameters["postnummer"]
+                    .requireNumberWithLength(POSTNUMMER_LENGDE)
             call.respond(poststeder[postnummer])
         } catch (e: IllegalArgumentException) {
             log.error(e) { "Ugyldig input i URL" }

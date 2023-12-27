@@ -4,8 +4,8 @@ info:
   description: "DigiHoT Oppslag"
   version: "1.0.0"
 servers:
-- url: "http://localhost:8083"
-- url: "https://digihot-oppslag.intern.dev.nav.no"
+  - url: "http://localhost:8083"
+  - url: "https://digihot-oppslag.intern.dev.nav.no"
 paths:
   /internal/is_alive:
     get:
@@ -57,11 +57,11 @@ paths:
     get:
       description: ""
       parameters:
-      - name: "bydelsnummer"
-        in: "path"
-        required: true
-        schema:
-          type: "string"
+        - name: "bydelsnummer"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
       responses:
         "200":
           description: "OK"
@@ -89,11 +89,11 @@ paths:
     get:
       description: ""
       parameters:
-      - name: "bydelsnummer"
-        in: "path"
-        required: true
-        schema:
-          type: "string"
+        - name: "bydelsnummer"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
       responses:
         "200":
           description: "OK"
@@ -121,11 +121,11 @@ paths:
     get:
       description: ""
       parameters:
-      - name: "kommunenummer"
-        in: "path"
-        required: true
-        schema:
-          type: "string"
+        - name: "kommunenummer"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
       responses:
         "200":
           description: "OK"
@@ -153,11 +153,11 @@ paths:
     get:
       description: ""
       parameters:
-      - name: "kommunenummer"
-        in: "path"
-        required: true
-        schema:
-          type: "string"
+        - name: "kommunenummer"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
       responses:
         "200":
           description: "OK"
@@ -185,11 +185,11 @@ paths:
     get:
       description: ""
       parameters:
-      - name: "postnummer"
-        in: "path"
-        required: true
-        schema:
-          type: "string"
+        - name: "postnummer"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
       responses:
         "200":
           description: "OK"
@@ -217,11 +217,11 @@ paths:
     get:
       description: ""
       parameters:
-      - name: "postnummer"
-        in: "path"
-        required: true
-        schema:
-          type: "string"
+        - name: "postnummer"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
       responses:
         "200":
           description: "OK"
@@ -239,7 +239,7 @@ components:
   schemas:
     Map:
       type: "object"
-      properties: {}
+      properties: { }
     BydelDto:
       type: "object"
       properties:

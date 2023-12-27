@@ -38,10 +38,11 @@ data class BydelCsv(
         require(bydelsnavn.isNotBlank())
     }
 
-    fun toDto(): BydelDto = BydelDto(
-        bydelsnummer = bydelsnummer,
-        bydelsnavn = bydelsnavn,
-    )
+    fun toDto(): BydelDto =
+        BydelDto(
+            bydelsnummer = bydelsnummer,
+            bydelsnavn = bydelsnavn,
+        )
 }
 
 data class BydelDto(
