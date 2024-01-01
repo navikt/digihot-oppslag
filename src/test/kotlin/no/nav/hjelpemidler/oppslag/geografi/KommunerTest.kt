@@ -8,27 +8,27 @@ class KommunerTest {
 
     @Test
     fun hentKommune() {
-        var kommune = kommuner["3004"]
-        assertEquals("Viken", kommune.fylkesnavn)
+        var kommune = kommuner["3107"]
+        assertEquals("Østfold", kommune.fylkesnavn)
         assertEquals("Fredrikstad", kommune.kommunenavn)
 
-        kommune = kommuner["5437"]
-        assertEquals("Troms og Finnmark", kommune.fylkesnavn, "Kontroller stor og liten forbokstav")
-        assertEquals("54", kommune.fylkesnummer)
+        kommune = kommuner["5610"]
+        assertEquals("Finnmark", kommune.fylkesnavn, "Kontroller stor og liten forbokstav")
+        assertEquals("56", kommune.fylkesnummer)
         assertEquals("Karasjok", kommune.kommunenavn, "Bruk norsk variant av navn, ikke samisk.")
 
-        kommune = kommuner["5442"]
+        kommune = kommuner["5636"]
         assertEquals("Nesseby", kommune.kommunenavn)
 
-        kommune = kommuner["5443"]
+        kommune = kommuner["5632"]
         assertEquals("Båtsfjord", kommune.kommunenavn)
 
-        kommune = kommuner["5444"]
+        kommune = kommuner["5605"]
         assertEquals("Sør-Varanger", kommune.kommunenavn, "Kontroller stor forbokstav og bindestrek")
     }
 
     @Test
     fun hentAlleKommuner() {
-        assertEquals(356, kommuner.size)
+        assertEquals(357, kommuner.size)
     }
 }
