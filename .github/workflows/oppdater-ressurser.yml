@@ -1,5 +1,6 @@
 name: Oppdater postnummertabell osv.
 on:
+  workflow_dispatch:
   schedule:
     - cron: '13 3 * * *' # Kl 03:13 hver natt
   push:
