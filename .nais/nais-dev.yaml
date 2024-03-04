@@ -8,7 +8,6 @@ metadata:
   namespace: teamdigihot
 spec:
   image: {{ image }}
-  team: teamdigihot
   liveness:
     path: /internal/is_alive
     initialDelay: 30
