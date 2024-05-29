@@ -27,6 +27,7 @@ spec:
     inbound:
       rules:
         - application: hm-saksberiker
+        - application: hm-saksfordeling
         - application: hm-soknad-api
         - application: hm-soknadsbehandling
         - application: hm-saksbehandling
