@@ -10,7 +10,7 @@ curl https://data.ssb.no/api/klass/v1/versions/1168.json | jq -r '.classificatio
 # Kommuner
 #
 # Kilde: https://ws.geonorge.no/kommuneinfo/v1/#/default/get_fylkerkommuner
-curl https://ws.geonorge.no/kommuneinfo/v1/fylkerkommuner | jq -r '.[].kommuner[] | .fylkesnummer + ";" + .fylkesnavn + ";" + .kommunenummer + ";" + .kommunenavnNorsk' >src/main/resources/geografi/kommuner.csv
+curl https://ws.geonorge.no/kommuneinfo/v1/fylkerkommuner?sorterkommuner=kommunenummer | jq -r '.[].kommuner[] | .fylkesnummer + ";" + .fylkesnavn + ";" + .kommunenummer + ";" + .kommunenavnNorsk' >src/main/resources/geografi/kommuner.csv
 
 #
 # Poststeder
