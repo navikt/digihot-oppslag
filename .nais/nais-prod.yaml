@@ -32,6 +32,7 @@ spec:
         - application: hm-saksbehandling
         - application: hm-delbestilling-api
         - application: hm-roller
+        - application: hm-delbestilling
   resources:
     limits:
       cpu: 500m
