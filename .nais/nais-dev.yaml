@@ -30,6 +30,7 @@ spec:
       rules:
         - application: hm-saksfordeling
         - application: hm-soknad-api
+        - application: hm-soknad
         - application: hm-soknadsbehandling
         - application: hm-saksbehandling
         - application: hm-delbestilling-api
