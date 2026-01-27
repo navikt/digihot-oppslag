@@ -1,0 +1,21 @@
+name: Kodekvalitet
+
+on:
+  push:
+    paths-ignore:
+      - "**.md"
+      - ".gitignore"
+      - "LICENCE"
+      - "CODEOWNERS"
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Scan kode for svakheter
+    uses: navikt/hm-workflows/.github/workflows/kodekvalitet.yaml@main
+    permissions:
+      actions: read
+      contents: write
+      security-events: write
+    secrets: inherit
