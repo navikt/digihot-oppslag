@@ -20,11 +20,11 @@ dependencies {
     // Ktor
     implementation(libs.bundles.ktor.server)
     implementation(libs.ktor.server.cio)
-    implementation("io.ktor:ktor-server-swagger")
+    implementation(libs.ktor.server.swagger)
 
     // Jackson
     implementation(libs.bundles.jackson)
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.16.1")
+    implementation(libs.jackson.dataformat.csv)
 
     // Logging
     implementation(libs.hotlibs.logging)
@@ -34,7 +34,6 @@ dependencies {
     // Test
     testImplementation(libs.bundles.ktor.server.test)
     testImplementation(libs.bundles.junit)
-    testImplementation("io.mockk:mockk:1.13.8")
 }
 
 kotlin { jvmToolchain(21) }
