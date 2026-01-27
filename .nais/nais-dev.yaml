@@ -18,9 +18,6 @@ spec:
     timeout: 100
   ingresses:
     - https://digihot-oppslag.intern.dev.nav.no
-  prometheus:
-    enabled: true
-    path: /internal/metrics
   port: 8080
   replicas:
     max: 1

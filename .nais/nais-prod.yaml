@@ -16,9 +16,6 @@ spec:
     path: /internal/is_ready
     initialDelay: 30
     timeout: 100
-  prometheus:
-    enabled: true
-    path: /internal/metrics
   port: 8080
   replicas:
     max: 2
