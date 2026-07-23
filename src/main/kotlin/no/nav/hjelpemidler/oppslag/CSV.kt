@@ -1,16 +1,16 @@
 package no.nav.hjelpemidler.oppslag
 
-import com.fasterxml.jackson.dataformat.csv.CsvMapper
-import com.fasterxml.jackson.dataformat.csv.CsvParser
-import com.fasterxml.jackson.dataformat.csv.CsvSchema
-import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import com.fasterxml.jackson.module.kotlin.kotlinModule
+import tools.jackson.dataformat.csv.CsvMapper
+import tools.jackson.dataformat.csv.CsvReadFeature
+import tools.jackson.dataformat.csv.CsvSchema
+import tools.jackson.module.kotlin.jacksonTypeRef
+import tools.jackson.module.kotlin.kotlinModule
 
 val csvMapper: CsvMapper =
     CsvMapper.builder()
         .addModule(kotlinModule())
-        .enable(CsvParser.Feature.TRIM_SPACES)
-        .enable(CsvParser.Feature.SKIP_EMPTY_LINES)
+        .enable(CsvReadFeature.TRIM_SPACES)
+        .enable(CsvReadFeature.SKIP_EMPTY_LINES)
         .build()
 
 inline fun <reified T : Any> readCsv(

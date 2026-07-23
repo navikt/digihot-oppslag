@@ -1,34 +1,41 @@
 package no.nav.hjelpemidler.oppslag.geografi
 
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import io.kotest.assertions.assertSoftly
+import io.kotest.matchers.maps.shouldHaveSize
+import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Test
 
 class KommunerTest {
     private val kommuner = Kommuner()
 
     @Test
     fun hentKommune() {
-        var kommune = kommuner["3107"]
-        assertEquals("Østfold", kommune.fylkesnavn)
-        assertEquals("Fredrikstad", kommune.kommunenavn)
+        assertSoftly(kommuner["3107"]) {
+            fylkesnavn shouldBe "Østfold"
+            kommunenavn shouldBe "Fredrikstad"
+        }
 
-        kommune = kommuner["5610"]
-        assertEquals("Finnmark", kommune.fylkesnavn, "Kontroller stor og liten forbokstav")
-        assertEquals("56", kommune.fylkesnummer)
-        assertEquals("Karasjok", kommune.kommunenavn, "Bruk norsk variant av navn, ikke samisk.")
+        assertSoftly(kommuner["5610"]) {
+            fylkesnavn shouldBe "Finnmark"
+            fylkesnummer shouldBe "56"
+            kommunenavn shouldBe "Karasjok"
+        }
 
-        kommune = kommuner["5636"]
-        assertEquals("Nesseby", kommune.kommunenavn)
+        assertSoftly(kommuner["5636"]) {
+            kommunenavn shouldBe "Nesseby"
+        }
 
-        kommune = kommuner["5632"]
-        assertEquals("Båtsfjord", kommune.kommunenavn)
+        assertSoftly(kommuner["5632"]) {
+            kommunenavn shouldBe "Båtsfjord"
+        }
 
-        kommune = kommuner["5605"]
-        assertEquals("Sør-Varanger", kommune.kommunenavn, "Kontroller stor forbokstav og bindestrek")
+        assertSoftly(kommuner["5605"]) {
+            kommunenavn shouldBe "Sør-Varanger"
+        }
     }
 
     @Test
     fun hentAlleKommuner() {
-        assertEquals(357, kommuner.size)
+        kommuner shouldHaveSize 357
     }
 }

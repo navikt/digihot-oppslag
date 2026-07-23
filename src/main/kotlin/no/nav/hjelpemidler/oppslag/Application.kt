@@ -1,6 +1,7 @@
 package no.nav.hjelpemidler.oppslag
 
-import io.ktor.serialization.jackson.jackson
+import io.ktor.http.ContentType
+import io.ktor.serialization.jackson3.JacksonConverter
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.plugins.calllogging.CallLogging
@@ -14,13 +15,14 @@ import no.nav.hjelpemidler.oppslag.geografi.Bydeler
 import no.nav.hjelpemidler.oppslag.geografi.Kommuner
 import no.nav.hjelpemidler.oppslag.geografi.Poststeder
 import no.nav.hjelpemidler.oppslag.geografi.geografiRoutes
+import no.nav.hjelpemidler.serialization.jackson.jsonMapper
 import org.slf4j.event.Level
 
 fun main(args: Array<String>): Unit = io.ktor.server.cio.EngineMain.main(args)
 
 fun Application.main() {
     install(ContentNegotiation) {
-        jackson()
+        register(ContentType.Application.Json, JacksonConverter(jsonMapper))
     }
 
     install(CallLogging) {

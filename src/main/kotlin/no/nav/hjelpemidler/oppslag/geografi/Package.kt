@@ -1,7 +1,9 @@
 package no.nav.hjelpemidler.oppslag.geografi
 
+import no.nav.hjelpemidler.text.isInteger
+
 fun String?.requireNumberWithLength(length: Int): String {
-    require(this != null && this.length == length && this.all { it.isDigit() }) {
+    require(!isNullOrBlank() && this.length == length && isInteger()) {
         "'$this' er ugyldig"
     }
     return this

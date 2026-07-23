@@ -12,10 +12,12 @@ application {
 }
 
 dependencies {
-    implementation(libs.kotlin.stdlib)
-
-    // hm-http
+    // hotlibs
+    implementation(platform(libs.hotlibs.platform))
+    implementation(libs.hotlibs.core)
     implementation(libs.hotlibs.http)
+    implementation(libs.hotlibs.logging)
+    implementation(libs.hotlibs.serialization)
 
     // Ktor
     implementation(libs.bundles.ktor.server)
@@ -23,23 +25,26 @@ dependencies {
     implementation(libs.ktor.server.swagger)
 
     // Jackson
-    implementation(libs.bundles.jackson)
     implementation(libs.jackson.dataformat.csv)
-
-    // Logging
-    implementation(libs.hotlibs.logging)
-    implementation(libs.slf4j.api)
-    implementation(libs.bundles.logging.runtime)
-
-    // Test
-    testImplementation(libs.bundles.ktor.server.test)
-    testImplementation(libs.bundles.junit)
 }
 
-kotlin { jvmToolchain(21) }
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
 
-tasks.test {
-    useJUnitPlatform()
+testing {
+    suites {
+        @Suppress("UnstableApiUsage")
+        val test = named<JvmTestSuite>("test") {
+            useJUnitJupiter(libs.versions.junit)
+            dependencies {
+                implementation(libs.ktor.server.test.host)
+                implementation(libs.hotlibs.test)
+            }
+        }
+    }
 }
 
 tasks.shadowJar {

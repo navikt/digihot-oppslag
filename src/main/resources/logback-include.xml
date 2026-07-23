@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <logger name="no.nav.hjelpemidler.oppslag" level="${DIGIHOT_OPPSLAG_LOG_LEVEL:-INFO}"/>
+</included>
