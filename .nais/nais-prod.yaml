@@ -31,6 +31,10 @@ spec:
         - application: hm-delbestilling-api
         - application: hm-roller
         - application: hm-delbestilling
+    outbound:
+      rules:
+        - application: logging
+          namespace: nais-system
   resources:
     limits:
       cpu: 500m
