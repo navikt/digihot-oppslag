@@ -26,3 +26,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "digihot-oppslag"
+include("app", "client")
