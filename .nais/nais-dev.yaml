@@ -25,14 +25,15 @@ spec:
   accessPolicy:
     inbound:
       rules:
-        - application: hm-saksfordeling
-        - application: hm-soknad-api
-        - application: hm-soknad
-        - application: hm-soknadsbehandling
-        - application: hm-saksbehandling
+        - application: hm-delbestilling
         - application: hm-delbestilling-api
         - application: hm-roller
-        - application: hm-delbestilling
+        - application: hm-saksbehandling
+        - application: hm-saksfordeling
+        - application: hm-soknad
+        - application: hm-soknad-api
+        - application: hm-soknadsbehandling
+        - application: hotpot
     outbound:
       rules:
         - application: logging
