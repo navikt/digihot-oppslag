@@ -1,28 +1,12 @@
-fun RepositoryHandler.github(repository: String) {
-    maven("https://maven.pkg.github.com/$repository") {
-        credentials {
-            username = System.getenv("GITHUB_ACTOR")
-            password = System.getenv("GITHUB_TOKEN")
-        }
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven("https://navikt.github.io/hotlibs-gradle")
     }
 }
 
-val hotlibsKatalogVersionProvider = providers.gradleProperty("hotlibsKatalogVersion")
-
-dependencyResolutionManagement {
-    @Suppress("UnstableApiUsage")
-    repositories {
-        mavenCentral()
-        github("navikt/hotlibs")
-
-        // Plassert under GitHub-repositories (med authentication) for å unngå unødvendige kostnader.
-        maven("https://github-package-registry-mirror.gc.nav.no/cached/maven-release")
-    }
-    versionCatalogs {
-        create("libs") {
-            from(hotlibsKatalogVersionProvider.map { "no.nav.hjelpemidler:katalog:$it" }.get())
-        }
-    }
+plugins {
+    id("no.nav.hjelpemidler.hotlibs") version "1.0"
 }
 
 rootProject.name = "digihot-oppslag"
