@@ -23,3 +23,34 @@ jobs:
     with:
       environment: 'dev-gcp:teamdigihot'
       java-version: '25'
+
+  publish:
+    needs:
+      - build
+    if: github.ref == 'refs/heads/main'
+    name: Publiser client
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: write
+      id-token: write
+    env:
+      VERSION_TAG: ${{ needs.build.outputs.version-tag }}
+
+    steps:
+      - name: Sjekk ut koden
+        uses: actions/checkout@v7
+
+      - name: Sett opp Java
+        uses: actions/setup-java@v6
+        with:
+          java-version: '25'
+          distribution: temurin
+
+      - name: Sett opp Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Publiser client
+        run: ./gradlew :client:publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
